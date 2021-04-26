@@ -2,13 +2,16 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   decrement,
-  increment,  
-  selectCount,
+  increment,    
+  selectGame,
+  displayGame
 } from './recursiveTypeSlice';
 
 export function RecursiveType() {
-    const count = useSelector(selectCount);
-    const dispatch = useDispatch();      
+    const game = useSelector(selectGame);
+    const dispatch = useDispatch();   
+
+    
   
     return (
       <div>
@@ -19,7 +22,8 @@ export function RecursiveType() {
           >
             -
           </button>
-          <span>{count}</span>
+          {Object.keys(game).map((k) => <div key={k}>{k}: {displayGame(game, k)}</div>)}
+          {console.log(game)}
           <button            
             aria-label="Increment value"
             onClick={() => dispatch(increment())}
