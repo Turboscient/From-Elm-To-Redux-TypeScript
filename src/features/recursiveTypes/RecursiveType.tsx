@@ -1,35 +1,25 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  decrement,
-  increment,    
+import {      
   selectGame,
-  displayGame
+  displayGame,
+  goToSequel
 } from './recursiveTypeSlice';
 
 export function RecursiveType() {
     const game = useSelector(selectGame);
-    const dispatch = useDispatch();   
-
-    
+    const dispatch = useDispatch();    
   
     return (
       <div>
-        <div>
+        <div>          
+          {Object.keys(game).map((k) => <div key={k}>{k}: {displayGame(game, k)}</div>)}        
           <button            
             aria-label="Decrement value"
-            onClick={() => dispatch(decrement())}
+            onClick={() => dispatch(goToSequel())}
           >
-            -
-          </button>
-          {Object.keys(game).map((k) => <div key={k}>{k}: {displayGame(game, k)}</div>)}
-          {console.log(game)}
-          <button            
-            aria-label="Increment value"
-            onClick={() => dispatch(increment())}
-          >
-            +
-          </button>
+            <span>Go to sequel (if the game has one)</span>
+          </button>   
         </div>        
       </div>
     );

@@ -6,12 +6,12 @@ import { pipe } from 'fp-ts/function'
 // https://github.com/gcanti/fp-ts
 
 enum esrb_rating { NotRated, RatingPending, Everyone, Teen, Mature }
-enum console { PC, Mobile, Xbox, Playstation, Nintendo }
+enum consoles { PC, Mobile, Xbox, Playstation, Nintendo }
 
 type name = string;
-type year = bigint;
+type year = number;
 
-type videogame_fields = name | year | boolean | boolean | esrb_rating | Array<console> | Option<videogame>
+type videogame_fields = name | year | boolean | esrb_rating | Array<consoles> | Option<videogame>
 
 export interface videogame {
   name: name,
@@ -19,41 +19,41 @@ export interface videogame {
   hasSinglePlayer: boolean,
   hasMultiPlayer: boolean,
   ratedByESRB: esrb_rating,
-  runsOn: Array<console>,
+  runsOn: Array<consoles>,
   sequel: Option<videogame>
 }
 
 const superMarioBros2: videogame = {
   name: "Super Mario Bros. 2",
-  yearReleased: BigInt(1988),
+  yearReleased: 1988,
   hasSinglePlayer: true,
   hasMultiPlayer: false,
   ratedByESRB: esrb_rating.NotRated, 
-  runsOn: [console.Nintendo],  
+  runsOn: [consoles.Nintendo],  
   sequel: none
 };
 
 const amongUs: videogame = {
   name: "Among Us",
-  yearReleased: BigInt(2018),
+  yearReleased: 2018,
   hasSinglePlayer: false,
   hasMultiPlayer: true,
   ratedByESRB: esrb_rating.Everyone, 
-  runsOn: [console.Nintendo, console.PC, console.Mobile, console.Xbox],  
+  runsOn: [consoles.Nintendo, consoles.PC, consoles.Mobile, consoles.Xbox],  
   sequel: none
 };
 
 const superMarioBros: videogame = {
   name: "Super Mario Bros.",
-  yearReleased: BigInt(1985),
+  yearReleased: 1985,
   hasSinglePlayer: true,
   hasMultiPlayer: false,
   ratedByESRB: esrb_rating.NotRated, 
-  runsOn: [console.Nintendo],  
+  runsOn: [consoles.Nintendo],  
   sequel: some(superMarioBros2)
 };
 
-const getSequel = (state: videogame) => {
+const getSequel = (state: videogame): videogame => {
   return pipe(
           // Argument
           state.sequel,
@@ -67,22 +67,20 @@ const getSequel = (state: videogame) => {
         )
 }
 
-export const displayGame = (game: videogame, field: videogame_fields) => {  
+export const displayGame = (game: videogame, field: videogame_fields): string => {  
   switch (field) {
     case "name": 
       return game.name;
     case "yearReleased": 
-      return Number(game.yearReleased);
+      return game.yearReleased.toString();
     case "hasSinglePlayer":     
-      let sp_char_list = game.hasSinglePlayer.toString().split("")  
-      return sp_char_list.map((k, i) => i === 0 ? k.toUpperCase() : k);
+      return game.hasSinglePlayer ? "True" : "False"
     case "hasMultiPlayer":     
-      let mp_char_list = game.hasMultiPlayer.toString().split("")  
-      return mp_char_list.map((k, i) => i === 0 ? k.toUpperCase() : k);
+      return game.hasMultiPlayer ? "True" : "False"
     case "ratedByESRB":
       return esrb_rating[game.ratedByESRB];
     case "runsOn":
-      return "[" + game.runsOn.map((k) => ` ${console[k]}` ) + " ]";
+      return "[" + game.runsOn.map((k) => ` ${consoles[k]}` ) + " ]";
     case "sequel":
       return isSome(game.sequel) ? getSequel(game).name : "None";
     default:
@@ -90,25 +88,19 @@ export const displayGame = (game: videogame, field: videogame_fields) => {
   }
 }
 
-const initialState = amongUs;
+const initialState: videogame = superMarioBros;
 
 export const recursiveTypeSlice = createSlice({
     name: 'videogame',
     initialState,    
-    reducers: {
-      increment: (state) => {        
-        state.yearReleased += 1n;
-      },
-      decrement: (state) => {
-        state.yearReleased -= 1n;
-      },      
-      goToSequel: (state) => {
-        state = getSequel(state);
+    reducers: {      
+      goToSequel: (state) => {              
+        return getSequel(state);       
       }
     },    
   });
 
-export const { increment, decrement } = recursiveTypeSlice.actions;
-export const selectGame = (state: any) => state.videogame;
+export const { goToSequel } = recursiveTypeSlice.actions;
+export const selectGame = (state: any): videogame => state.videogame;
 
 export default recursiveTypeSlice.reducer;
