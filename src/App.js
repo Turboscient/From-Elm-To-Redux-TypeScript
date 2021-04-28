@@ -1,5 +1,4 @@
-import React from 'react';
-import { RecursiveType } from './features/recursiveTypes/RecursiveType';
+import { RecursiveType } from './features/recursiveTypes/RecursiveTypeView';
 import './App.css';
 
 function App() {

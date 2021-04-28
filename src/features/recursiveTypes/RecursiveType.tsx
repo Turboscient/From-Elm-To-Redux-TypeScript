@@ -1,27 +1,21 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {      
-  selectGame,
-  displayGame,
-  goToSequel
-} from './recursiveTypeSlice';
+import { Option } from 'fp-ts/Option'
 
-export function RecursiveType() {
-    const game = useSelector(selectGame);
-    const dispatch = useDispatch();    
-  
-    return (
-      <div>
-        <div>          
-          {Object.keys(game).map((k) => <div key={k}>{k}: {displayGame(game, k)}</div>)}        
-          <button            
-            aria-label="Decrement value"
-            onClick={() => dispatch(goToSequel())}
-          >
-            <span>Go to sequel (if the game has one)</span>
-          </button>   
-        </div>        
-      </div>
-    );
-  }
-  
+enum esrb_rating { NotRated, RatingPending, Everyone, Teen, Mature }
+enum consoles { PC, Mobile, Xbox, Playstation, Nintendo }
+
+export type name = string;
+export type year = number;
+
+export type videogame_fields = name | year | boolean | esrb_rating | Array<consoles> | Option<videogame>
+
+export interface videogame {
+  name: name,
+  yearReleased: year
+  hasSinglePlayer: boolean,
+  hasMultiPlayer: boolean,
+  ratedByESRB: esrb_rating,
+  runsOn: Array<consoles>,
+  sequel: Option<videogame>
+}
+
+export { esrb_rating, consoles }
