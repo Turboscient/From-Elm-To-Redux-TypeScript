@@ -24,38 +24,36 @@ I wanted to show people that many of the core ideas in Elm and functional progra
 
 The coding challenge was designed to show the students how to work with recursive types in Elm. This is slightly more challenging in Elm than in TypeScript, so I provided them some additional resources in the Hints section. Note that for their submission, we only required them to instantiate the game seen on-screen with one particular game and they were given a [template](https://gist.github.com/Turboscient/3e086c596e1a6631a0b02cc95571e20d) to fill in, simplifying the challenge. Nevertheless, recursive types and record destructuring posed quite a challenge for many even with the Hints, evidenced by the number of Piazza questions we received.
 
--- Hints <br /> 
--- https://stackoverflow.com/questions/31358764/how-to-access-fields-of-a-union-in-elm <br /> 
--- https://github.com/elm/compiler/blob/master/hints/recursive-alias.md <br /> 
+> -- Hints <br /> 
+> -- https://stackoverflow.com/questions/31358764/how-to-access-fields-of-a-union-in-elm <br /> 
+> -- https://github.com/elm/compiler/blob/master/hints/recursive-alias.md <br /> 
 
 
-{- Preface: Imagine you live in a world with exactly 3 videogames (Among Us, Super Mario Bros. and Super Mario Bros. 2).
-Super Mario Bros. 2 is the still the sequel to Super Mario Bros. in this alternate universe, but Super Mario Bros. 2 has
-no sequel. All the other details of the games are the same. Represent these videogames with a VideoGame type, then
-fill in the details for each field. The VideoGame type should have the following (partially-completed) fields:
-
-  name : <br /> 
-  hasSinglePlayer : <br /> 
-  hasMultiPlayer : <br />
-  ratedByESRB : ESRB_Rating <br /> 
-  runsOn : List Console <br /> 
-  yearReleased : <br />
-  sequel : Maybe VideoGame <br /> 
-
-Use the provided type aliases whenever possible (e.g. Year instead of Int) when completing the type. As well,
-
-1) Make a function gameName that returns the name of the VideoGame it takes as an input
-2) Make a function gameHasSequel that tells us if the VideoGame has a sequel or not
-3) Print your answers to the on-screen prompts using the "text" function.
-
-Ex. 
-(gameName superMarioBros) returns "Super Mario Bros."
-(gameHasSequel superMarioBros) returns True.
-(gameHasSequel superMarioBros2) returns False.
-
-Replace the TODOs with your code. Do not alter type annotations unless instructed otherwise.
--}
-
+> Preface: Imagine you live in a world with exactly 3 videogames (Among Us, Super Mario Bros. and Super Mario Bros. 2).
+> Super Mario Bros. 2 is the still the sequel to Super Mario Bros. in this alternate universe, but Super Mario Bros. 2 has
+> no sequel. All the other details of the games are the same. Represent these videogames with a VideoGame type, then
+> fill in the details for each field. The VideoGame type should have the following (partially-completed) fields:
+>
+>  name : <br /> 
+>  hasSinglePlayer : <br /> 
+>  hasMultiPlayer : <br />
+>  ratedByESRB : ESRB_Rating <br /> 
+>  runsOn : List Console <br /> 
+>  yearReleased : <br />
+>  sequel : Maybe VideoGame <br /> 
+>
+> Use the provided type aliases whenever possible (e.g. Year instead of Int) when completing the type. As well,
+>
+> 1) Make a function gameName that returns the name of the VideoGame it takes as an input
+> 2) Make a function gameHasSequel that tells us if the VideoGame has a sequel or not
+> 3) Print your answers to the on-screen prompts using the "text" function.
+>
+> Ex. 
+> (gameName superMarioBros) returns "Super Mario Bros."
+> (gameHasSequel superMarioBros) returns True.
+> (gameHasSequel superMarioBros2) returns False.
+>
+> Replace the TODOs with your code. Do not alter type annotations unless instructed otherwise.
 
 ## The Elm Solution
 
