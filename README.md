@@ -34,13 +34,13 @@ Super Mario Bros. 2 is the still the sequel to Super Mario Bros. in this alterna
 no sequel. All the other details of the games are the same. Represent these videogames with a VideoGame type, then
 fill in the details for each field. The VideoGame type should have the following (partially-completed) fields:
 
-  name :<br /> 
+  name : <br /> 
   hasSinglePlayer : <br /> 
-  hasMultiPlayer : <br />    
-  ratedByESRB : ESRB_Rating<br /> 
-  runsOn : List Console<br /> 
-  yearReleased : <br />  
-  sequel : Maybe VideoGame<br /> 
+  hasMultiPlayer : <br />
+  ratedByESRB : ESRB_Rating <br /> 
+  runsOn : List Console <br /> 
+  yearReleased : <br />
+  sequel : Maybe VideoGame <br /> 
 
 Use the provided type aliases whenever possible (e.g. Year instead of Int) when completing the type. As well,
 
