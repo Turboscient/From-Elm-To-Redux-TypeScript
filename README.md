@@ -24,9 +24,9 @@ I wanted to show people that many of the core ideas in Elm and functional progra
 
 The coding challenge was designed to show the students how to work with recursive types in Elm. This is slightly more challenging in Elm than in TypeScript, so I provided them some additional resources in the Hints section. Note that for their submission, we only required them to instantiate the game seen on-screen with one particular game and they were given a [template](https://gist.github.com/Turboscient/3e086c596e1a6631a0b02cc95571e20d) to fill in, simplifying the challenge. Nevertheless, recursive types and record destructuring posed quite a challenge for many even with the Hints, evidenced by the number of Piazza questions we received.
 
--- Hints
--- https://stackoverflow.com/questions/31358764/how-to-access-fields-of-a-union-in-elm
--- https://github.com/elm/compiler/blob/master/hints/recursive-alias.md
+-- Hints <br /> 
+-- https://stackoverflow.com/questions/31358764/how-to-access-fields-of-a-union-in-elm <br /> 
+-- https://github.com/elm/compiler/blob/master/hints/recursive-alias.md <br /> 
 
 
 {- Preface: Imagine you live in a world with exactly 3 videogames (Among Us, Super Mario Bros. and Super Mario Bros. 2).
@@ -34,13 +34,13 @@ Super Mario Bros. 2 is the still the sequel to Super Mario Bros. in this alterna
 no sequel. All the other details of the games are the same. Represent these videogames with a VideoGame type, then
 fill in the details for each field. The VideoGame type should have the following (partially-completed) fields:
 
-  name : 
-  hasSinglePlayer : 
-  hasMultiPlayer :    
-  ratedByESRB : ESRB_Rating
-  runsOn : List Console
-  yearReleased :   
-  sequel : Maybe VideoGame
+  name :<br /> 
+  hasSinglePlayer : <br /> 
+  hasMultiPlayer : <br />    
+  ratedByESRB : ESRB_Rating<br /> 
+  runsOn : List Console<br /> 
+  yearReleased : <br />  
+  sequel : Maybe VideoGame<br /> 
 
 Use the provided type aliases whenever possible (e.g. Year instead of Int) when completing the type. As well,
 
@@ -168,13 +168,14 @@ This runs on Elm 0.19 and uses the GraphicSVG package for Elm. It was hosted in 
 
 ## Highlights of Conversion
 
-I made some minor modifications to the end product in my conversion, namely that I wanted to display the entire videogame on the screen, and have a button which shifts the on-screen videogame to its sequel. Some of the key translations are seen below:
+I made some minor modifications to the end product in my conversion, namely that I wanted to display the entire videogame on the screen, and have a button which shifts the on-screen videogame to its sequel. Additionally, gameName and gameHasSequel are not implemented, as they are trivial in this implementation. Some of the key translations are seen below:
 
 * Elm's type variant is translated into "enum"
 * Elm's type alias is translated into "type" from TypeScript
 * Elm's type record is translated into "interface" from TypeScript
 * Elm's list is translated into "Array"
 * Elm's Maybe is translated into "Option" from fp-ts
+* Elm's Int type is represented by "number" (you could alternatively use BigInt, albeit it has limitations and its own challenges)
 
 ```
 enum esrb_rating { NotRated, RatingPending, Everyone, Teen, Mature }
