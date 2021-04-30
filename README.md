@@ -1,5 +1,288 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
+## From Elm To TypeScript + Redux + Fp/ts
+
+Elm is a functional programming language that generates JavaScript code through a Haskell compiler. This project translates an Elm exercise I made as a TA for McMaster's COMPSCI 1XD3 into ES2020 JavaScript without using Elm at all. We use a functional programming library for TypeScript to introduce pipes and the Option type (analogous to Elm's Maybe type).
+
+## The Elm Challenge 
+
+
+```
+-- Hints
+-- https://stackoverflow.com/questions/31358764/how-to-access-fields-of-a-union-in-elm
+-- https://github.com/elm/compiler/blob/master/hints/recursive-alias.md
+
+
+{- Preface: Imagine you live in a world with exactly 3 videogames (Among Us, Super Mario Bros. and Super Mario Bros. 2).
+Super Mario Bros. 2 is the still the sequel to Super Mario Bros. in this alternate universe, but Super Mario Bros. 2 has
+no sequel. All the other details of the games are the same. Represent these videogames with a VideoGame type, then
+fill in the details for each field. The VideoGame type should have the following (partially-completed) fields:
+
+  name : 
+  hasSinglePlayer : 
+  hasMultiPlayer :    
+  ratedByESRB : ESRB_Rating
+  runsOn : List Console
+  yearReleased :   
+  sequel : Maybe VideoGame
+
+Use the provided type aliases whenever possible (e.g. Year instead of Int) when completing the type. As well,
+
+1) Make a function gameName that returns the name of the VideoGame it takes as an input
+2) Make a function gameHasSequel that tells us if the VideoGame has a sequel or not
+3) Print your answers to the on-screen prompts using the "text" function.
+
+Ex. 
+(gameName superMarioBros) returns "Super Mario Bros."
+(gameHasSequel superMarioBros) returns True.
+(gameHasSequel superMarioBros2) returns False.
+
+Replace the TODOs with your code. Do not alter type annotations unless instructed otherwise.
+-}
+```
+
+## The Elm Solution
+
+```
+type ESRB_Rating = NotRated | Rating_Pending | Everyone | Teen | Mature
+type Console = PC | Mobile | Xbox | PlayStation | Nintendo
+
+type alias Name = String
+type alias Year = Int
+
+fromBool : Bool -> String
+fromBool = 
+   \bool -> if bool then "True" else "False"
+
+type VideoGame =   
+  VideoGame
+   {
+   name : Name,
+   hasSinglePlayer : Bool,
+   hasMultiPlayer : Bool,   
+   ratedByESRB : ESRB_Rating,
+   runsOn : List Console,
+   yearReleased : Year,   
+   sequel : Maybe VideoGame
+   }    
+
+gameName : VideoGame -> Name
+gameName (VideoGame game) = 
+    game.name
+
+gameHasSequel : VideoGame -> Bool
+gameHasSequel (VideoGame game) =
+   case game.sequel of
+       Just (VideoGame _) -> True
+       _ -> False
+       
+-- Example games to test
+       
+amongUs : VideoGame
+amongUs =    
+  VideoGame
+   {
+   name = "Among Us",
+   hasSinglePlayer = False,
+   hasMultiPlayer = True,   
+   ratedByESRB = Everyone,
+   runsOn = [PC, Mobile, Xbox, Nintendo],
+   yearReleased = 2018,   
+   sequel = Nothing
+   }  
+   
+superMarioBros : VideoGame
+superMarioBros =    
+  VideoGame
+   {
+   name = "Super Mario Bros.",
+   hasSinglePlayer = True,
+   hasMultiPlayer = False,   
+   ratedByESRB = NotRated,
+   runsOn = [Nintendo],
+   yearReleased = 1985,   
+   sequel = Just (superMarioBros2)
+   }  
+   
+superMarioBros2 : VideoGame
+superMarioBros2 =    
+  VideoGame
+   {
+   name = "Super Mario Bros. 2",
+   hasSinglePlayer = True,
+   hasMultiPlayer = False,   
+   ratedByESRB = NotRated,
+   runsOn = [Nintendo],
+   yearReleased = 1988,   
+   sequel = Nothing
+   }  
+
+                     
+init = { time = 0 }
+
+type Msg = Tick Float GetKeyState                  
+
+myShapes model = [ text "The name of the game is:" |> centered |> filled black |> move (0, 15),
+                   superMarioBros |> gameName |> text |> centered |> filled red, 
+                   text "This game has a sequel:" |> centered |> filled black |> move (0, -15),
+                   superMarioBros |> gameHasSequel |> fromBool |> text |> centered |> filled red |> move (0, -30)                   
+                 ]
+
+update msg model = case msg of 
+                     Tick t _ -> { model | time = t }
+```
+
+This runs on Elm 0.19 and uses the GraphicSVG package for Elm. It was hosted in macoutreach.rocks, which abstracts away some of the boilerplate Elm code.
+
+## Highlights of Conversion
+
+I made some minor modifications to the end product in my conversion, namely that I wanted to display the entire videogame on the screen, and have a button which shifts the on-screen videogame to its sequel. Ultimately this specific change is more sophisticated, but not due to any inherent complications of the languages or libraries. 
+
+* Elm's type variants are translated into "enum"
+* Elm's type aliases are translated into "type"
+* Elm's type records are translated into "interface"
+* Elm's list is translated into "Array"
+* Elm's Maybe is translated into "Option" from fp/ts
+
+```
+enum esrb_rating { NotRated, RatingPending, Everyone, Teen, Mature }
+enum consoles { PC, Mobile, Xbox, Playstation, Nintendo }
+
+export type name = string;
+export type year = number;
+
+export type videogame_fields = name | year | boolean | esrb_rating | Array<consoles> | Option<videogame>
+
+export interface videogame {
+  name: name,
+  yearReleased: year
+  hasSinglePlayer: boolean,
+  hasMultiPlayer: boolean,
+  ratedByESRB: esrb_rating,
+  runsOn: Array<consoles>,
+  sequel: Option<videogame>
+}
+```
+
+Now we represent the videogames
+
+```
+const superMarioBros2: videogame = {
+    name: "Super Mario Bros. 2",
+    yearReleased: 1988,
+    hasSinglePlayer: true,
+    hasMultiPlayer: false,
+    ratedByESRB: esrb_rating.NotRated, 
+    runsOn: [consoles.Nintendo],  
+    sequel: none
+  };
+  
+  const amongUs: videogame = {
+    name: "Among Us",
+    yearReleased: 2018,
+    hasSinglePlayer: false,
+    hasMultiPlayer: true,
+    ratedByESRB: esrb_rating.Everyone, 
+    runsOn: [consoles.Nintendo, consoles.PC, consoles.Mobile, consoles.Xbox],  
+    sequel: none
+  };
+  
+  const superMarioBros: videogame = {
+    name: "Super Mario Bros.",
+    yearReleased: 1985,
+    hasSinglePlayer: true,
+    hasMultiPlayer: false,
+    ratedByESRB: esrb_rating.NotRated, 
+    runsOn: [consoles.Nintendo],  
+    sequel: some(superMarioBros2)
+  };
+```
+
+This takes a Redux state and returns state.sequel if it exists or state otherwise
+
+```
+export const getSequel = (state: videogame): videogame => {
+  return pipe(
+          // Argument
+          state.sequel,
+          // Pattern match over Maybe type
+          match(
+            // Nothing
+            () => state,
+            // Some(...)
+            (sequel) => sequel
+          )
+        )
+}
+```
+
+Elm's Msg and Update system are translated into Redux reducers; this updates the state, such that state => state.sequel | state => state
+
+```
+const initialState: videogame = superMarioBros;
+
+export const recursiveTypeSlice = createSlice({
+    name: 'videogame',
+    initialState,    
+    reducers: {      
+      goToSequel: (state) => {              
+        return getSequel(state);       
+      }
+    },    
+  });
+
+export const { goToSequel } = recursiveTypeSlice.actions;
+export const selectGame = (state: any): videogame => state.videogame;
+```
+
+This returns a string representation to display a videogame on the screen
+
+```
+const displayGame = (game: videogame, field: videogame_fields): string => {  
+  switch (field) {
+    case "name": 
+      return game.name;
+    case "yearReleased": 
+      return game.yearReleased.toString();
+    case "hasSinglePlayer":     
+      return game.hasSinglePlayer ? "True" : "False"
+    case "hasMultiPlayer":     
+      return game.hasMultiPlayer ? "True" : "False"
+    case "ratedByESRB":
+      return esrb_rating[game.ratedByESRB];
+    case "runsOn":
+      return "[" + game.runsOn.map((k) => ` ${consoles[k]}` ) + " ]";
+    case "sequel":
+      return isSome(game.sequel) ? getSequel(game).name : "None";
+    default:
+      return "";
+  }
+}
+```
+
+And finally, we can showcase the View in JSX
+
+```
+export function RecursiveType() {
+    const game = useSelector(selectGame);
+    const dispatch = useDispatch();    
+  
+    return (
+      <div>
+        <div>          
+          {Object.keys(game).map((k) => <div key={k}>{k}: {displayGame(game, k)}</div>)}        
+          <button            
+            aria-label="Decrement value"
+            onClick={() => dispatch(goToSequel())}
+          >
+            <span>Go to sequel (if the game has one)</span>
+          </button>   
+        </div>        
+      </div>
+    );
+  }
+  ```
+
 ## Available Scripts
 
 In the project directory, you can run:
