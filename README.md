@@ -6,6 +6,7 @@ Elm is a functional programming language that generates JavaScript code through 
 
 ## The Elm Challenge 
 
+The coding challenge was designed to show the students how to work with recursive types in Elm. This is slightly more challenging in Elm than in TypeScript, so I provided them some additional resources in the Hints section. Note that for their submission, we only required them to instantiate the game seen on-screen with one particular game and they were given a [template](https://gist.github.com/Turboscient/3e086c596e1a6631a0b02cc95571e20d) to fill in, simplifying the challenge. Nevertheless, recursive types and record destructuring posed quite a challenge for many even with the Hints, evidenced by the number of Piazza questions we received.
 
 ```
 -- Hints
@@ -122,27 +123,44 @@ init = { time = 0 }
 
 type Msg = Tick Float GetKeyState                  
 
-myShapes model = [ text "The name of the game is:" |> centered |> filled black |> move (0, 15),
-                   superMarioBros |> gameName |> text |> centered |> filled red, 
-                   text "This game has a sequel:" |> centered |> filled black |> move (0, -15),
-                   superMarioBros |> gameHasSequel |> fromBool |> text |> centered |> filled red |> move (0, -30)                   
+myShapes model = [ text "The name of the game is:" 
+                      |> centered 
+                      |> filled black 
+                      |> move (0, 15),
+                   superMarioBros 
+                      |> gameName 
+                      |> text 
+                      |> centered 
+                      |> filled red, 
+                   text "This game has a sequel:" 
+                      |> centered 
+                      |> filled black 
+                      |> move (0, -15),
+                   superMarioBros 
+                      |> gameHasSequel 
+                      |> fromBool 
+                      |> text 
+                      |> centered 
+                      |> filled red 
+                      |> move (0, -30)                   
                  ]
 
 update msg model = case msg of 
                      Tick t _ -> { model | time = t }
 ```
 
-This runs on Elm 0.19 and uses the GraphicSVG package for Elm. It was hosted in macoutreach.rocks, which abstracts away some of the boilerplate Elm code.
+This runs on Elm 0.19 and uses the GraphicSVG package for Elm. It was hosted in macoutreach.rocks, a web IDE that abstracts away some of the boilerplate Elm code.
 
 ## Highlights of Conversion
 
-I made some minor modifications to the end product in my conversion, namely that I wanted to display the entire videogame on the screen, and have a button which shifts the on-screen videogame to its sequel. Ultimately this specific change is more sophisticated, but not due to any inherent complications of the languages or libraries. 
+I made some minor modifications to the end product in my conversion, namely that I wanted to display the entire videogame on the screen, and have a button which shifts the on-screen videogame to its sequel. Some of the key translations are seen below:
 
-* Elm's type variants are translated into "enum"
-* Elm's type aliases are translated into "type"
-* Elm's type records are translated into "interface"
+* Elm's type variant is translated into "enum"
+* Elm's type alias is translated into "type" from TypeScript
+* Elm's type record is translated into "interface" from TypeScript
 * Elm's list is translated into "Array"
 * Elm's Maybe is translated into "Option" from fp/ts
+* Elm's record is translated into "Object"
 
 ```
 enum esrb_rating { NotRated, RatingPending, Everyone, Teen, Mature }
@@ -164,7 +182,7 @@ export interface videogame {
 }
 ```
 
-Now we represent the videogames
+Now we represent the individual videogames
 
 ```
 const superMarioBros2: videogame = {
@@ -216,7 +234,7 @@ export const getSequel = (state: videogame): videogame => {
 }
 ```
 
-Elm's Msg and Update system are translated into Redux reducers; this updates the state, such that state => state.sequel | state => state
+Elm's Msg and Update system are translated into Redux reducers; this updates the state, such that state => state.sequel or state => state
 
 ```
 const initialState: videogame = superMarioBros;
@@ -260,7 +278,7 @@ const displayGame = (game: videogame, field: videogame_fields): string => {
 }
 ```
 
-And finally, we can showcase the View in JSX
+And finally, we can showcase the View in JSX by rendering the state object's keys and values
 
 ```
 export function RecursiveType() {
