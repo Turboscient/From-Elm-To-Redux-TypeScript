@@ -1,8 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
-## From Elm To TypeScript + Redux + Fp/ts
+## From Elm To TypeScript + Redux + fp-ts
 
-Elm is a functional programming language that generates JavaScript code through a Haskell compiler. This project translates an Elm exercise I made as a TA for McMaster's COMPSCI 1XD3 into ES2020 JavaScript. We use a functional programming library for TypeScript to introduce pipes and the Option type (analogous to Elm's Maybe type).
+Elm is a functional programming language that generates JavaScript code through a Haskell compiler. This project translates an Elm exercise I made as a TA for McMaster's COMPSCI 1XD3 into ES2020 TypeScript + Redux. We use the fp-ts functional programming library for TypeScript to introduce key ideas from Elm such as pipes and the Option type (analogous to Elm's Maybe type).
 
 From 
 
@@ -18,7 +18,7 @@ To
 
 ## Why Translate
 
-I wanted to show people that many of the core ideas in Elm and functional programming are directly applicable to what they do in more popular languages, especially Redux and TypeScript. Given Elm's small ecosystem and community, it won't overtake the popular JS frameworks and libraries anytime soon, but that doesn't mean we can't learn a lot from it. In fact, Redux even acknowledges many of the [fantastic ways of Elm](https://redux.js.org/understanding/history-and-design/prior-art).
+I wanted to show people that many of the core ideas in Elm and functional programming can be tightly coupled with what they do in more popular languages and tools, especially Redux and TypeScript. Given Elm's small ecosystem and community, it may not overtake the popular JS frameworks and libraries anytime soon, but that doesn't mean we can't learn a lot from it. In fact, Redux even acknowledges many of the [fantastic ways of Elm](https://redux.js.org/understanding/history-and-design/prior-art#elm) and says Elm should be a source of future inspiration!
 
 ## The Elm Challenge 
 
