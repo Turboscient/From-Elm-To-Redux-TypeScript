@@ -27,8 +27,8 @@ The coding challenge was designed to show the students how to work with recursiv
 > -- Hints <br /> 
 > -- https://stackoverflow.com/questions/31358764/how-to-access-fields-of-a-union-in-elm <br /> 
 > -- https://github.com/elm/compiler/blob/master/hints/recursive-alias.md <br /> 
-
-
+>
+>
 > Preface: Imagine you live in a world with exactly 3 videogames (Among Us, Super Mario Bros. and Super Mario Bros. 2).
 > Super Mario Bros. 2 is the still the sequel to Super Mario Bros. in this alternate universe, but Super Mario Bros. 2 has
 > no sequel. All the other details of the games are the same. Represent these videogames with a VideoGame type, then
@@ -49,9 +49,9 @@ The coding challenge was designed to show the students how to work with recursiv
 > 3) Print your answers to the on-screen prompts using the "text" function.
 >
 > Ex. 
-> (gameName superMarioBros) returns "Super Mario Bros."
-> (gameHasSequel superMarioBros) returns True.
-> (gameHasSequel superMarioBros2) returns False.
+> (gameName superMarioBros) returns "Super Mario Bros." <br />
+> (gameHasSequel superMarioBros) returns True. <br />
+> (gameHasSequel superMarioBros2) returns False. <br />
 >
 > Replace the TODOs with your code. Do not alter type annotations unless instructed otherwise.
 
