@@ -66,6 +66,7 @@ type alias Year = Int
 
 fromBool : Bool -> String
 fromBool = 
+   -- Anonymous function with arg bool
    \bool -> if bool then "True" else "False"
 
 type VideoGame =   
@@ -80,13 +81,16 @@ type VideoGame =
    sequel : Maybe VideoGame
    }    
 
-gameName : VideoGame -> Name
+gameName : VideoGame -> Name   
+-- function with record destructuring
 gameName (VideoGame game) = 
     game.name
 
 gameHasSequel : VideoGame -> Bool
 gameHasSequel (VideoGame game) =
    case game.sequel of
+       -- In Elm, a Maybe type is either Just(...) or Nothing
+       -- Underscore is wildcard
        Just (VideoGame _) -> True
        _ -> False
        
@@ -94,6 +98,7 @@ gameHasSequel (VideoGame game) =
        
 amongUs : VideoGame
 amongUs =    
+  -- See Hints for explanation
   VideoGame
    {
    name = "Among Us",
@@ -162,7 +167,7 @@ update msg model = case msg of
                      Tick t _ -> { model | time = t }
 ```
 
-This runs on Elm 0.19 and uses the GraphicSVG package in Elm primarily for displaying to the screen. It was hosted in macoutreach.rocks, a web IDE that abstracts away some of the boilerplate Elm code.
+This runs on Elm 0.19 and uses the GraphicSVG package in Elm primarily for the view. It was hosted in macoutreach.rocks, a web IDE that abstracts away some of the boilerplate Elm code.
 
 ## Highlights of Conversion
 
