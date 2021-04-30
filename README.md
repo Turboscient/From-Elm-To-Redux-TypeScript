@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
-## From Elm To TypeScript + Redux + fp-ts
+## From Elm To React + TypeScript + Redux + fp-ts
 
 Elm is a functional programming language that generates JavaScript code through a Haskell compiler. This project translates an Elm exercise I made as a TA for McMaster's COMPSCI 1XD3 into ES2020 TypeScript + Redux. We use the fp-ts functional programming library for TypeScript to introduce key ideas from Elm such as pipes and the Option type (analogous to Elm's Maybe type).
 
