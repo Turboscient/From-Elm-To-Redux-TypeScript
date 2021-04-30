@@ -241,11 +241,11 @@ export const getSequel = (state: videogame): videogame => {
   return pipe(
           // Argument
           state.sequel,
-          // Pattern match over Maybe type
+          // Pattern match over Option type
           match(
-            // Nothing
+            // none
             () => state,
-            // Some(...)
+            // some(...)
             (sequel) => sequel
           )
         )
