@@ -24,7 +24,6 @@ I wanted to show people that many of the core ideas in Elm and functional progra
 
 The coding challenge was designed to show the students how to work with recursive types in Elm. This is slightly more challenging in Elm than in TypeScript, so I provided them some additional resources in the Hints section. Note that for their submission, we only required them to instantiate the game seen on-screen with one particular game and they were given a [template](https://gist.github.com/Turboscient/3e086c596e1a6631a0b02cc95571e20d) to fill in, simplifying the challenge. Nevertheless, recursive types and record destructuring posed quite a challenge for many even with the Hints, evidenced by the number of Piazza questions we received.
 
-```
 -- Hints
 -- https://stackoverflow.com/questions/31358764/how-to-access-fields-of-a-union-in-elm
 -- https://github.com/elm/compiler/blob/master/hints/recursive-alias.md
@@ -56,7 +55,7 @@ Ex.
 
 Replace the TODOs with your code. Do not alter type annotations unless instructed otherwise.
 -}
-```
+
 
 ## The Elm Solution
 
@@ -176,7 +175,6 @@ I made some minor modifications to the end product in my conversion, namely that
 * Elm's type record is translated into "interface" from TypeScript
 * Elm's list is translated into "Array"
 * Elm's Maybe is translated into "Option" from fp-ts
-* Elm's record is translated into "Object"
 
 ```
 enum esrb_rating { NotRated, RatingPending, Everyone, Teen, Mature }
