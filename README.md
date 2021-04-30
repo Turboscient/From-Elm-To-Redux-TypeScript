@@ -2,7 +2,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## From Elm To TypeScript + Redux + Fp/ts
 
-Elm is a functional programming language that generates JavaScript code through a Haskell compiler. This project translates an Elm exercise I made as a TA for McMaster's COMPSCI 1XD3 into ES2020 JavaScript without using Elm at all. We use a functional programming library for TypeScript to introduce pipes and the Option type (analogous to Elm's Maybe type).
+Elm is a functional programming language that generates JavaScript code through a Haskell compiler. This project translates an Elm exercise I made as a TA for McMaster's COMPSCI 1XD3 into ES2020 JavaScript. We use a functional programming library for TypeScript to introduce pipes and the Option type (analogous to Elm's Maybe type).
+
+[TypeScript](https://www.typescriptlang.org/)
+[Redux](https://redux.js.org/)
+[fp-ts](https://gcanti.github.io/fp-ts/)
 
 ## The Elm Challenge 
 
@@ -159,7 +163,7 @@ I made some minor modifications to the end product in my conversion, namely that
 * Elm's type alias is translated into "type" from TypeScript
 * Elm's type record is translated into "interface" from TypeScript
 * Elm's list is translated into "Array"
-* Elm's Maybe is translated into "Option" from fp/ts
+* Elm's Maybe is translated into "Option" from fp-ts
 * Elm's record is translated into "Object"
 
 ```
