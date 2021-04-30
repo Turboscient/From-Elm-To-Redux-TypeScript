@@ -82,7 +82,7 @@ type VideoGame =
    }    
 
 gameName : VideoGame -> Name   
--- function with record destructuring
+-- function with arg destructuring
 gameName (VideoGame game) = 
     game.name
 
