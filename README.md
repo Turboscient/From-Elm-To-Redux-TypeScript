@@ -173,7 +173,7 @@ I made some minor modifications to the end product in my conversion, namely that
 * Elm's ```type``` record is translated into ```interface``` from TypeScript
 * Elm's ```List``` is translated into ```Array```
 * Elm's ```Maybe``` is translated into ```Option``` from fp-ts
-* Elm's ```Int``` type is represented by ```number``` (you could alternatively use ```BigInt```, albeit it has limitations and its own challenges)
+* Elm's ```Int``` type is translated into ```number``` (you could more precisely use ```BigInt```, albeit with limitations and its own challenges)
 
 ```
 enum esrb_rating { NotRated, RatingPending, Everyone, Teen, Mature }
