@@ -252,7 +252,7 @@ export const getSequel = (state: videogame): videogame => {
 }
 ```
 
-Elm's ```Msg``` and ```update``` system are translated into Redux reducers; this updates the ```state```, such that ```state => state.sequel``` or ```state => state```
+Elm's ```Msg``` and ```update``` system are translated into Redux reducers; this updates the ```state```, such that ```state => state.sequel``` or ```state => state``` depending on the result of ```getSequel(state)```
 
 ```
 const initialState: videogame = superMarioBros;
