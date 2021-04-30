@@ -171,7 +171,7 @@ I made some minor modifications to the end product in my conversion, namely that
 * Elm's ```type``` variant is translated into ```enum```
 * Elm's ```type alias``` is translated into ```type``` from TypeScript
 * Elm's ```type``` record is translated into ```interface``` from TypeScript
-* Elm's ```List``` is translated into "Array"
+* Elm's ```List``` is translated into ```Array```
 * Elm's ```Maybe``` is translated into ```Option``` from fp-ts
 * Elm's ```Int``` type is represented by ```number``` (you could alternatively use ```BigInt```, albeit it has limitations and its own challenges)
 
@@ -229,7 +229,7 @@ const superMarioBros2: videogame = {
   };
 ```
 
-This takes a Redux state and returns ```state.sequel``` if it exists or ```state``` otherwise
+This takes a Redux ```state``` and returns ```state.sequel``` if it exists or ```state``` otherwise
 
 ```
 export const getSequel = (state: videogame): videogame => {
