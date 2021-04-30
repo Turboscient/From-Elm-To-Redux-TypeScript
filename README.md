@@ -166,14 +166,14 @@ This runs on Elm 0.19 and uses the GraphicSVG package for Elm. It was hosted in 
 
 ## Highlights of Conversion
 
-I made some minor modifications to the end product in my conversion, namely that I wanted to display the entire videogame on the screen, and have a button which shifts the on-screen videogame to its sequel. Additionally, gameName and gameHasSequel are not implemented, as they are trivial in this implementation. Some of the key translations are seen below:
+I made some minor modifications to the end product in my conversion, namely that I wanted to display the entire videogame on the screen, and have a button which shifts the on-screen videogame to its sequel. Additionally, ```gameName``` and ```gameHasSequel``` are not implemented, as they are trivial in this implementation. Some of the key translations are seen below:
 
-* Elm's type variant is translated into "enum"
-* Elm's type alias is translated into "type" from TypeScript
-* Elm's type record is translated into "interface" from TypeScript
-* Elm's list is translated into "Array"
-* Elm's Maybe is translated into "Option" from fp-ts
-* Elm's Int type is represented by "number" (you could alternatively use BigInt, albeit it has limitations and its own challenges)
+* Elm's ```type``` variant is translated into ```enum```
+* Elm's ```type alias``` is translated into ```type``` from TypeScript
+* Elm's ```type``` record is translated into ```interface``` from TypeScript
+* Elm's ```List``` is translated into "Array"
+* Elm's ```Maybe``` is translated into ```Option``` from fp-ts
+* Elm's ```Int``` type is represented by ```number``` (you could alternatively use ```BigInt```, albeit it has limitations and its own challenges)
 
 ```
 enum esrb_rating { NotRated, RatingPending, Everyone, Teen, Mature }
@@ -229,7 +229,7 @@ const superMarioBros2: videogame = {
   };
 ```
 
-This takes a Redux state and returns state.sequel if it exists or state otherwise
+This takes a Redux state and returns ```state.sequel``` if it exists or ```state``` otherwise
 
 ```
 export const getSequel = (state: videogame): videogame => {
@@ -247,7 +247,7 @@ export const getSequel = (state: videogame): videogame => {
 }
 ```
 
-Elm's Msg and Update system are translated into Redux reducers; this updates the state, such that state => state.sequel or state => state
+Elm's ```Msg``` and ```update``` system are translated into Redux reducers; this updates the ```state```, such that ```state => state.sequel``` or ```state => state```
 
 ```
 const initialState: videogame = superMarioBros;
@@ -266,7 +266,7 @@ export const { goToSequel } = recursiveTypeSlice.actions;
 export const selectGame = (state: any): videogame => state.videogame;
 ```
 
-This returns a string representation to display a videogame on the screen
+This returns a ```string``` representation to display a videogame on the screen
 
 ```
 const displayGame = (game: videogame, field: videogame_fields): string => {  
@@ -291,7 +291,7 @@ const displayGame = (game: videogame, field: videogame_fields): string => {
 }
 ```
 
-And finally, we can showcase the View in JSX by rendering the state object's keys and values
+And finally, we can showcase the view in JSX by rendering the state object's keys and values
 
 ```
 export function RecursiveType() {
