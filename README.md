@@ -4,9 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Elm is a functional programming language that generates JavaScript code through a Haskell compiler. This project translates an Elm exercise I made as a TA for McMaster's COMPSCI 1XD3 into ES2020 JavaScript. We use a functional programming library for TypeScript to introduce pipes and the Option type (analogous to Elm's Maybe type).
 
-[TypeScript](https://www.typescriptlang.org/)
-[Redux](https://redux.js.org/)
-[fp-ts](https://gcanti.github.io/fp-ts/)
+* [TypeScript](https://www.typescriptlang.org/)
+* [Redux](https://redux.js.org/)
+* [fp-ts](https://gcanti.github.io/fp-ts/)
 
 ## The Elm Challenge 
 
