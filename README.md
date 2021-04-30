@@ -162,7 +162,7 @@ update msg model = case msg of
                      Tick t _ -> { model | time = t }
 ```
 
-This runs on Elm 0.19 and uses the GraphicSVG package for Elm. It was hosted in macoutreach.rocks, a web IDE that abstracts away some of the boilerplate Elm code.
+This runs on Elm 0.19 and uses the GraphicSVG package in Elm for displaying to the screen. It was hosted in macoutreach.rocks, a web IDE that abstracts away some of the boilerplate Elm code.
 
 ## Highlights of Conversion
 
